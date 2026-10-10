@@ -1,6 +1,6 @@
 import * as Device from 'expo-device';
-import { Link } from "expo-router";
-import { Platform, StyleSheet } from 'react-native';
+import { useRouter } from "expo-router";
+import { Button, Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
@@ -28,6 +28,9 @@ function getDevMenuHint() {
 }
 
 export default function HomeScreen() {
+
+  const router = useRouter()
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
@@ -35,15 +38,9 @@ export default function HomeScreen() {
           <ThemedText type="title" style={styles.title}>
             Bienvenido a&nbsp;<ThemedText type="title" style={styles.titleDLPA}>DLPA</ThemedText>
           </ThemedText>
-          <Link href={"/camera"}>
-            <ThemedText type="title" style={styles.title}>
-              Tomar Foto
-            </ThemedText>
-          </Link>
+          
+          <Button title='Tomar Foto' onPress={() => router.push("/camera")}></Button>
         </ThemedView>
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
 
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
