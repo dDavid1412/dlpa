@@ -1,8 +1,8 @@
 import * as Device from 'expo-device';
+import { Link } from "expo-router";
 import { Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
@@ -32,12 +32,15 @@ export default function HomeScreen() {
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
           <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
+            Bienvenido a&nbsp;<ThemedText type="title" style={styles.titleDLPA}>DLPA</ThemedText>
           </ThemedText>
+          <Link href={"/camera"}>
+            <ThemedText type="title" style={styles.title}>
+              Tomar Foto
+            </ThemedText>
+          </Link>
         </ThemedView>
-
         <ThemedText type="code" style={styles.code}>
           get started
         </ThemedText>
@@ -71,6 +74,11 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
+  },
+  titleDLPA: {
+    textAlign: 'center',
+    fontStyle: 'italic',
+    color: '#0084ff',
   },
   code: {
     textTransform: 'uppercase',
