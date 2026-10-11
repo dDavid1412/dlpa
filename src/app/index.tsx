@@ -39,7 +39,7 @@ export default function HomeScreen() {
             Bienvenido a&nbsp;<ThemedText type="title" style={styles.titleDLPA}>DLPA</ThemedText>
           </ThemedText>
           
-          <Button title='Tomar Foto' onPress={() => router.push("/camera")}></Button>
+          <Button title='Tomar Foto' onPress={() => router.push("/photos")}></Button>
         </ThemedView>
 
         {Platform.OS === 'web' && <WebBadge />}
