@@ -19,6 +19,9 @@ const PhotoPreviewSection = ({photo, handleRetakePhoto}: {
             <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
                 <ThemedText style={styles.text}>Tomar otra</ThemedText>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
+                <ThemedText style={styles.text}>Enviar</ThemedText>
+            </TouchableOpacity>
         </View>
     </SafeAreaView>
 );

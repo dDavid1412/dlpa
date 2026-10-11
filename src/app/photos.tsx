@@ -1,4 +1,4 @@
-import { Button, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Button, Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import PhotoPreviewSection from '@/components/photo-preview-section';
@@ -86,7 +86,7 @@ export default function Photos() {
         </View>
         <View style={styles.buttonContainer2}>
             <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
-            <ThemedText style={styles.text}>Tomar foto</ThemedText>
+                <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
             </TouchableOpacity>
         </View>
         </View>
@@ -169,4 +169,9 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+  cameraIcon: {
+  width: 36,
+  height: 36,
+  tintColor: 'white',
+},
 });
