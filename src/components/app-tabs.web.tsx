@@ -27,9 +27,6 @@ export default function AppTabs() {
           <TabTrigger name="photos" href="/photos" asChild>
             <TabButton>Cámara</TabButton>
           </TabTrigger>
-          <TabTrigger name="settings" href="/settings" asChild>
-            <TabButton>Ajustes</TabButton>
-          </TabTrigger>
         </CustomTabList>
       </TabList>
     </Tabs>
