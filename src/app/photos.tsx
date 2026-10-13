@@ -86,7 +86,7 @@ export default function Photos() {
         </View>
         <View style={styles.buttonContainer2}>
             <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
-                <Image source={require('@/assets/images/tabIcons/take.png')} style={styles.cameraIcon} resizeMode="contain" />
+                <Image source={require('@/assets/images/tabIcons/take.png')} style={styles.cameraIconTake} resizeMode="contain" />
             </TouchableOpacity>
         </View>
         </View>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'transparent',
     width: '100%',
-    height: '5%',
+    height: '8%',
     paddingHorizontal: 10,
   },
   button: {
@@ -172,6 +172,11 @@ const styles = StyleSheet.create({
   cameraIcon: {
     width: 36,
     height: 36,
+    tintColor: 'white',
+  },
+  cameraIconTake: {
+    width: 48,
+    height: 48,
     tintColor: 'white',
   },
 });
