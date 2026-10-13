@@ -81,7 +81,7 @@ export default function Photos() {
         <CameraView style={styles.camera} facing={type} ref={cameraRef}/>
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <ThemedText style={styles.text}>Dar vuelta</ThemedText>
+            <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
             </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer2}>

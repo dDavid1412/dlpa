@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     minHeight: 50,
     paddingHorizontal: 28,
     borderRadius: 12,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#0084ff',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
