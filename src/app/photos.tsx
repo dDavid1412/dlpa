@@ -81,12 +81,12 @@ export default function Photos() {
         <CameraView style={styles.camera} facing={type} ref={cameraRef}/>
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
+                <Image source={require('@/assets/images/tabIcons/swap.png')} style={styles.cameraIcon} resizeMode="contain" />
             </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer2}>
             <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
-                <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
+                <Image source={require('@/assets/images/tabIcons/take.png')} style={styles.cameraIcon} resizeMode="contain" />
             </TouchableOpacity>
         </View>
         </View>
@@ -170,8 +170,8 @@ const styles = StyleSheet.create({
     height: 100,
   },
   cameraIcon: {
-  width: 36,
-  height: 36,
-  tintColor: 'white',
-},
+    width: 36,
+    height: 36,
+    tintColor: 'white',
+  },
 });

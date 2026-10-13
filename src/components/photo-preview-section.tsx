@@ -16,7 +16,7 @@ const PhotoPreviewSection = ({photo, handleRetakePhoto}: {
 
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
-                <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
+                <Image source={require('@/assets/images/tabIcons/retake.png')} style={styles.cameraIcon} resizeMode="contain" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
                 <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
