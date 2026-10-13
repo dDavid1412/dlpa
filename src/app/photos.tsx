@@ -34,6 +34,7 @@ export default function Photos() {
     };
 
     const handleRetakePhoto = () => setPhoto(null);
+    const handleApiResponse = () => setPhoto(null)
   
   if(!permission) {
     return (
@@ -68,7 +69,7 @@ export default function Photos() {
     );
   }  
 
-  if (photo) return <PhotoPreviewSection photo={photo} handleRetakePhoto={handleRetakePhoto} />
+  if (photo) return <PhotoPreviewSection photo={photo} handleRetakePhoto={handleRetakePhoto} handleApiResponse={handleApiResponse} />
 
 
   return (

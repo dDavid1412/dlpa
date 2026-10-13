@@ -2,9 +2,10 @@ import { CameraCapturedPicture } from 'expo-camera';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const PhotoPreviewSection = ({photo, handleRetakePhoto}: {
+const PhotoPreviewSection = ({photo, handleRetakePhoto, handleApiResponse}: {
     photo: CameraCapturedPicture;
     handleRetakePhoto: () => void;
+    handleApiResponse: () => void;
 }) => (
     <SafeAreaView style={styles.container}>
         <View style={styles.box}>
@@ -18,7 +19,7 @@ const PhotoPreviewSection = ({photo, handleRetakePhoto}: {
             <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
                 <Image source={require('@/assets/images/tabIcons/retake.png')} style={styles.cameraIcon} resizeMode="contain" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
+            <TouchableOpacity style={styles.button} onPress={handleApiResponse}>
                 <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
             </TouchableOpacity>
         </View>
