@@ -1,4 +1,4 @@
-import { Button, Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import PhotoPreviewSection from '@/components/photo-preview-section';
@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-import { CameraType, CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraCapturedPicture, CameraType, CameraView, useCameraPermissions } from 'expo-camera';
 import { useRef, useState } from 'react';
 
 
@@ -34,7 +34,38 @@ export default function Photos() {
     };
 
     const handleRetakePhoto = () => setPhoto(null);
-    const handleApiResponse = () => setPhoto(null)
+    const handleApiResponse = async (currentPhoto: CameraCapturedPicture) => {
+        try {
+            const formData = new FormData();
+            const file = {
+                uri: currentPhoto.uri,
+                name: `photo.${currentPhoto.format}`,
+                type: `image/${currentPhoto.format}`,
+            };
+
+            if (Platform.OS === 'web') {
+                const imageBlob = await fetch(currentPhoto.uri).then(response => response.blob());
+                formData.append('image', imageBlob, file.name);
+            } else {
+                formData.append('image', file as unknown as Blob);
+            }
+
+            const response = await fetch('http://localhost:8000', {
+                method: 'POST',
+                body: formData,
+            });
+            const responseText = await response.text();
+
+            if (!response.ok) {
+                throw new Error(`API request failed (${response.status}): ${responseText || 'Unknown error'}`);
+            }
+
+            Alert.alert('Respuesta del API', responseText || 'La imagen fue recibida correctamente.');
+        } catch (error) {
+            const message = error instanceof Error ? error.message : 'No se pudo enviar la imagen.';
+            Alert.alert('Error al enviar la imagen', message);
+        }
+    };
   
   if(!permission) {
     return (

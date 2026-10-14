@@ -1,30 +1,48 @@
 import { CameraCapturedPicture } from 'expo-camera';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { ActivityIndicator, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PhotoPreviewSection = ({photo, handleRetakePhoto, handleApiResponse}: {
     photo: CameraCapturedPicture;
     handleRetakePhoto: () => void;
-    handleApiResponse: () => void;
-}) => (
-    <SafeAreaView style={styles.container}>
-        <View style={styles.box}>
-            <Image
-                style={styles.previewContainer}
-                source={{uri: 'data:image/jpg;base64,' + photo.base64}}
-            />
-        </View>
+    handleApiResponse: (photo: CameraCapturedPicture) => Promise<void>;
+}) => {
+    const [isSending, setIsSending] = useState(false);
 
-        <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleRetakePhoto}>
-                <Image source={require('@/assets/images/tabIcons/retake.png')} style={styles.cameraIcon} resizeMode="contain" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleApiResponse}>
-                <Image source={require('@/assets/images/tabIcons/camera.png')} style={styles.cameraIcon} resizeMode="contain" />
-            </TouchableOpacity>
-        </View>
-    </SafeAreaView>
-);
+    const sendPhoto = async () => {
+        setIsSending(true);
+        try {
+            await handleApiResponse(photo);
+        } finally {
+            setIsSending(false);
+        }
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.box}>
+                <Image
+                    style={styles.previewContainer}
+                    source={{uri: `data:image/${photo.format};base64,${photo.base64}`}}
+                />
+            </View>
+
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button} onPress={handleRetakePhoto} disabled={isSending}>
+                    <Image source={require('@/assets/images/tabIcons/retake.png')} style={styles.cameraIcon} resizeMode="contain" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={sendPhoto} disabled={isSending}>
+                    {isSending ? (
+                        <ActivityIndicator color="white" />
+                    ) : (
+                        <Image source={require('@/assets/images/tabIcons/send.png')} style={styles.cameraIcon} resizeMode="contain" />
+                    )}
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    );
+};
 
 const styles = StyleSheet.create({
   container:{
