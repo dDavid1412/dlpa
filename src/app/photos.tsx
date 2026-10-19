@@ -5,6 +5,7 @@ import PhotoPreviewSection from '@/components/photo-preview-section';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
+import { PREDICT_URL } from '@/constants/api';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { CameraCapturedPicture, CameraType, CameraView, useCameraPermissions } from 'expo-camera';
 import { useRef, useState } from 'react';
@@ -45,12 +46,12 @@ export default function Photos() {
 
             if (Platform.OS === 'web') {
                 const imageBlob = await fetch(currentPhoto.uri).then(response => response.blob());
-                formData.append('image', imageBlob, file.name);
+                formData.append('file', imageBlob, file.name);
             } else {
-                formData.append('image', file as unknown as Blob);
+                formData.append('file', file as unknown as Blob);
             }
 
-            const response = await fetch('http://localhost:8000', {
+            const response = await fetch(PREDICT_URL, {
                 method: 'POST',
                 body: formData,
             });
