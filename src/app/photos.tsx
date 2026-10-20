@@ -150,17 +150,6 @@ const styles = StyleSheet.create({
     paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
   },
-  title: {
-    textAlign: 'center',
-  },
-  titleDLPA: {
-    textAlign: 'center',
-    fontStyle: 'italic',
-    color: '#0084ff',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
   camera: {
     flex: 1,
     borderRadius: 15,
