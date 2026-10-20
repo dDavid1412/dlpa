@@ -13,15 +13,21 @@ import { useRef, useState } from 'react';
 
 
 export default function Photos() {
+    // Almacena el estado del permiso de la cámara y permite solicitarlo al sistema.
     const [permission, requestPermission] = useCameraPermissions();
+    // Guarda la última imagen capturada. Un valor distinto de null muestra la vista previa.
     const [photo, setPhoto] = useState<any>(null);
+    // Mantiene una referencia a la cámara para capturar fotos desde el botón.
     const cameraRef = useRef<CameraView | null>(null);
+    // Controla si se muestra la cámara trasera o la frontal.
     const [type, setType] = useState<CameraType>('back');
 
+    // Alterna entre la cámara trasera y la frontal.
     function toggleCameraFacing() {
         setType(current => (current === 'back' ? 'front' : 'back'));
     };
 
+    // Captura una foto con datos en base64.
     const handleTakePhoto = async () => {
         if (cameraRef.current) {
             const options = {
@@ -34,7 +40,10 @@ export default function Photos() {
         }
     };
 
+    // Elimina la foto actual y vuelve a la vista de la cámara.
     const handleRetakePhoto = () => setPhoto(null);
+
+    // Construye una solicitud multipart y envía la imagen capturada a la API de predicción.
     const handleApiResponse = async (currentPhoto: CameraCapturedPicture) => {
         try {
             const formData = new FormData();
@@ -44,6 +53,7 @@ export default function Photos() {
                 type: `image/${currentPhoto.format}`,
             };
 
+            // Los navegadores requieren un Blob, mientras que las plataformas nativas aceptan un descriptor de archivo.
             if (Platform.OS === 'web') {
                 const imageBlob = await fetch(currentPhoto.uri).then(response => response.blob());
                 formData.append('file', imageBlob, file.name);
@@ -57,6 +67,7 @@ export default function Photos() {
             });
             const responseText = await response.text();
 
+            // Convierte las respuestas que no son 2xx en el mismo flujo de error que los fallos de red.
             if (!response.ok) {
                 throw new Error(`API request failed (${response.status}): ${responseText || 'Unknown error'}`);
             }
@@ -67,7 +78,8 @@ export default function Photos() {
             Alert.alert('Error al enviar la imagen', message);
         }
     };
-  
+
+  // Muestra un estado de carga mientras Expo determina el estado actual del permiso.
   if(!permission) {
     return (
     <ThemedView style={styles.container}>
@@ -83,6 +95,8 @@ export default function Photos() {
     </ThemedView>
   );
   } 
+
+  // Explica por qué no se puede usar la cámara y permite solicitar el permiso.
   if(!permission.granted) {
     return (
     <ThemedView style={styles.container}>
@@ -101,17 +115,20 @@ export default function Photos() {
     );
   }  
 
+  // Cuando existe una foto, reemplaza los controles de la cámara por la vista previa y las acciones de envío.
   if (photo) return <PhotoPreviewSection photo={photo} handleRetakePhoto={handleRetakePhoto} handleApiResponse={handleApiResponse} />
 
 
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
+        {/* Encabezado de la cámara y área de vista previa en directo. */}
         <ThemedView style={styles.titleContainer}>
             <ThemedText type="subtitle">Cámara</ThemedText>
         </ThemedView> 
         <View style={styles.container}>
         <CameraView style={styles.camera} facing={type} ref={cameraRef}/>
+        {/* Los controles superpuestos mantienen despejada la vista previa de la cámara. */}
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
                 <Image source={require('@/assets/images/tabIcons/swap.png')} style={styles.cameraIcon} resizeMode="contain" />
@@ -130,6 +147,7 @@ export default function Photos() {
     </ThemedView>
   );
 }
+// Estilos de distribución y controles compartidos por los estados de permisos, cámara y web.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

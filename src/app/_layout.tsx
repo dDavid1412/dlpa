@@ -7,11 +7,13 @@ import AppTabs from '@/components/app-tabs';
 
 SplashScreen.preventAutoHideAsync();
 
-/* Wrapper de la aplicación, se encarga de manejar las tabs. Utiliza el Theme provider de expo para los colores y native tabs de epxo */
+// Diseño raíz: aplica el tema, la animación de inicio y el navegador de pestañas de cada plataforma.
 export default function TabLayout() {
+  // Selecciona el tema de navegación según la preferencia de color del dispositivo.
   const colorScheme = useColorScheme();
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      {/* La capa gestiona la transición de inicio antes de mostrar las pestañas. */}
       <AnimatedSplashOverlay />
       <AppTabs />
     </ThemeProvider>

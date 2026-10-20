@@ -8,8 +8,10 @@ const PhotoPreviewSection = ({photo, handleRetakePhoto, handleApiResponse}: {
     handleRetakePhoto: () => void;
     handleApiResponse: (photo: CameraCapturedPicture) => Promise<void>;
 }) => {
+    // Previene el envío de múltiples solicitudes a la API.
     const [isSending, setIsSending] = useState(false);
 
+    // Espera la respuesta y restaura el estado del botón.
     const sendPhoto = async () => {
         setIsSending(true);
         try {
@@ -21,6 +23,7 @@ const PhotoPreviewSection = ({photo, handleRetakePhoto, handleApiResponse}: {
 
     return (
         <SafeAreaView style={styles.container}>
+            {/* Muestra la imagen capturada. */}
             <View style={styles.box}>
                 <Image
                     style={styles.previewContainer}
@@ -28,6 +31,7 @@ const PhotoPreviewSection = ({photo, handleRetakePhoto, handleApiResponse}: {
                 />
             </View>
 
+            {/* Permite descartar la imagen o enviarla a la API. */}
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={handleRetakePhoto} disabled={isSending}>
                     <Image source={require('@/assets/images/tabIcons/retake.png')} style={styles.cameraIcon} resizeMode="contain" />
@@ -44,6 +48,7 @@ const PhotoPreviewSection = ({photo, handleRetakePhoto, handleApiResponse}: {
     );
 };
 
+// Distribución y controles de la vista previa a pantalla completa.
 const styles = StyleSheet.create({
   container:{
     flex: 1,

@@ -8,11 +8,13 @@ import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
 export default function HomeScreen() {
 
+  // Instancia de Expo Router utilizada para navegar a la pantalla de la cámara.
   const router = useRouter()
 
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
+        {/* Acción principal que se muestra al abrir la aplicación. */}
         <ThemedView style={styles.heroSection}>
           <ThemedText type="title" style={styles.title}>
             Bienvenido a&nbsp;<ThemedText type="title" style={styles.titleDLPA}>DLPA</ThemedText>
@@ -20,6 +22,7 @@ export default function HomeScreen() {
           <ThemedText style={styles.subtitle}>
             Comprueba si estás registrado
           </ThemedText>
+          {/* Abre el flujo de la cámara cuando el usuario pulsa la acción principal. */}
           <Pressable
             accessibilityRole="button"
             hitSlop={8}
@@ -37,6 +40,7 @@ export default function HomeScreen() {
   );
 }
 
+// Estilos de distribución adaptable y apariencia de la pantalla de inicio.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
