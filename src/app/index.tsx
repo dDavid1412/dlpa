@@ -22,7 +22,7 @@ export default function HomeScreen() {
           <ThemedText style={styles.subtitle}>
             Comprueba si estás registrado
           </ThemedText>
-          {/* Abre el flujo de la cámara cuando el usuario pulsa la acción principal. */}
+          {/* Abre el tab de la cámara. */}
           <Pressable
             accessibilityRole="button"
             hitSlop={8}
