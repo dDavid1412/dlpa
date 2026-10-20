@@ -112,13 +112,12 @@ export default function Photos() {
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        {/* Encabezado de la cámara y área de vista previa en directo. */}
         <ThemedView style={styles.titleContainer}>
             <ThemedText type="subtitle">Cámara</ThemedText>
         </ThemedView> 
         <View style={styles.container}>
+          {/* Encabezado de la cámara y área de vista previa en directo. */}
         <CameraView style={styles.camera} facing={type} ref={cameraRef}/>
-        {/* Los controles superpuestos mantienen despejada la vista previa de la cámara. */}
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
                 <Image source={require('@/assets/images/tabIcons/swap.png')} style={styles.cameraIcon} resizeMode="contain" />
