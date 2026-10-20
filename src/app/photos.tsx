@@ -109,7 +109,6 @@ export default function Photos() {
   // Cuando existe una foto, reemplaza los controles de la cámara por la vista previa y las acciones de envío.
   if (photo) return <PhotoPreviewSection photo={photo} handleRetakePhoto={handleRetakePhoto} handleApiResponse={handleApiResponse} />
 
-
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
