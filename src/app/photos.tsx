@@ -86,8 +86,6 @@ export default function Photos() {
             <ThemedText type="subtitle">Cámara</ThemedText>
         </ThemedView> 
             <ThemedText type="subtitle">Se necesita permitir el uso de la cámara en la aplicación</ThemedText>
-
-
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
     </ThemedView>
@@ -102,9 +100,6 @@ export default function Photos() {
             <ThemedText type="default">Se necesita permitir el uso de la cámara en la aplicación</ThemedText>
             <Button onPress={requestPermission} title='Dar permiso' />
         </ThemedView> 
-
-
-
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
     </ThemedView>
@@ -136,8 +131,6 @@ export default function Photos() {
             </TouchableOpacity>
         </View>
         </View>
-
-
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
     </ThemedView>
