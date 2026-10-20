@@ -77,7 +77,7 @@ export default function Photos() {
         }
     };
 
-  // Muestra un estado de carga mientras Expo determina el estado actual del permiso.
+  // Muestra un estado de carga mientras se determina el estado del permiso.
   if(!permission) {
     return (
     <ThemedView style={styles.container}>
@@ -93,8 +93,6 @@ export default function Photos() {
     </ThemedView>
   );
   } 
-
-  // Explica por qué no se puede usar la cámara y permite solicitar el permiso.
   if(!permission.granted) {
     return (
     <ThemedView style={styles.container}>
