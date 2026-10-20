@@ -7,6 +7,7 @@ import AppTabs from '@/components/app-tabs';
 
 SplashScreen.preventAutoHideAsync();
 
+/* Wrapper de la aplicación, se encarga de manejar las tabs. Utiliza el Theme provider de expo para los colores y native tabs de epxo */
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   return (
