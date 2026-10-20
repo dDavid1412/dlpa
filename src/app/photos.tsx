@@ -52,8 +52,6 @@ export default function Photos() {
                 name: `photo.${currentPhoto.format}`,
                 type: `image/${currentPhoto.format}`,
             };
-
-            // Los navegadores requieren un Blob, mientras que las plataformas nativas aceptan un descriptor de archivo.
             if (Platform.OS === 'web') {
                 const imageBlob = await fetch(currentPhoto.uri).then(response => response.blob());
                 formData.append('file', imageBlob, file.name);
